@@ -1,6 +1,6 @@
-package com.hackerearth.verifonesimapi;
+package com.hackerearth.verifone.sim;
 
-import com.hackerearth.verifonesimapi.SimCard.SimCardBuilder;
+import com.hackerearth.verifone.sim.SimCard.SimCardBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

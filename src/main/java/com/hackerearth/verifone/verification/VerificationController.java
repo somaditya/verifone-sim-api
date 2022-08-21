@@ -1,13 +1,11 @@
-package com.hackerearth.verifonesimapi.verification;
+package com.hackerearth.verifone.verification;
 
-import com.hackerearth.verifonesimapi.SimCard;
-import com.hackerearth.verifonesimapi.SimCardRepository;
+import com.hackerearth.verifone.sim.SimCard;
+import com.hackerearth.verifone.sim.SimCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 public class VerificationController {
@@ -22,7 +20,7 @@ public class VerificationController {
     @GetMapping("/verify/{id}")
     public boolean verify(@PathVariable Long id) {
         SimCard sim = repository.findById(id).get();
-        
+
         return sim.getKyc().equals("COMPLETE");
     }
 }

@@ -1,4 +1,4 @@
-package com.hackerearth.verifonesimapi;
+package com.hackerearth.verifone.sim;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

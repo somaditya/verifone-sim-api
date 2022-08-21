@@ -1,10 +1,10 @@
-package com.hackerearth.verifonesimapi;
+package com.hackerearth.verifone;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VerifoneSimApiApplicationTests {
+class SimCardApplicationTests {
 
 	@Test
 	void contextLoads() {

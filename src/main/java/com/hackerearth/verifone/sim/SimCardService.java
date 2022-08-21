@@ -25,19 +25,17 @@ public class SimCardService {
     }
 
     SimCard updateSim(SimCard update, Long simCardNo) {
-        return repository.findById(simCardNo)
-                .map(simCard -> {
-                    simCard.setSimCardNo(update.getSimCardNo());
-                    simCard.setMobileNo(update.getMobileNo());
-                    simCard.setStatus(update.getStatus());
-                    simCard.setExpiryDate(update.getExpiryDate());
-                    simCard.setStateOfRegistration(update.getStateOfRegistration());
-                    simCard.setKyc(update.getKyc());
-                    simCard.setTelecomProvider(update.getTelecomProvider());
-                    simCard.setFullName(update.getFullName());
+        SimCard simCard = repository.findById(simCardNo).get();
+        simCard.setSimCardNo(update.getSimCardNo());
+        simCard.setMobileNo(update.getMobileNo());
+        simCard.setStatus(update.getStatus());
+        simCard.setExpiryDate(update.getExpiryDate());
+        simCard.setStateOfRegistration(update.getStateOfRegistration());
+        simCard.setKyc(update.getKyc());
+        simCard.setTelecomProvider(update.getTelecomProvider());
+        simCard.setFullName(update.getFullName());
 
-                    return repository.save(simCard);
-                }).orElseThrow();
+        return repository.save(simCard);
     }
 
     void removeSim(Long simCardNo) {

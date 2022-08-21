@@ -3,8 +3,9 @@ package com.hackerearth.verifonesimapi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SimCardController {
@@ -21,5 +22,28 @@ public class SimCardController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-//    @GetMapping("/")
+    @GetMapping("/listall")
+    public List<SimCard> listAll() {
+        return repository.findAll();
+    }
+
+    @PutMapping("/{id}")
+    public SimCard update(@RequestBody SimCard updatedSim, @PathVariable Long id) {
+        return repository.findById(id)
+                .map(simCard -> {
+                    simCard.setSimCardNo(updatedSim.getSimCardNo());
+                    simCard.setMobileNo(updatedSim.getMobileNo());
+                    simCard.setStatus(updatedSim.getStatus());
+                    simCard.setExpiryDate(updatedSim.getExpiryDate());
+                    simCard.setStateOfRegistration(updatedSim.getStateOfRegistration());
+                    simCard.setKyc(updatedSim.getKyc());
+                    simCard.setTelecomProvider(updatedSim.getTelecomProvider());
+                    simCard.setFullName(updatedSim.getFullName());
+
+                    return repository.save(simCard);
+                }).orElseGet(() -> {
+                    updatedSim.setSimCardNo(id);
+                    return repository.save(updatedSim);
+                });
+    }
 }

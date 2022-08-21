@@ -6,3 +6,4 @@
 
 - Postman collection for testing API: `verifone-simcar-api.postman_collection.json`
 - Replace {{url}} with `https://verifone-demo.azuremicroservices.io`
+- GitHub repo: `https://github.com/somaditya/verifone-sim-api`

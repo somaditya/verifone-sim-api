@@ -1,3 +1,3 @@
 # Verifone SIM Card API
 
-> **Depolyment link:** 
+> **Depolyment link:** https://verifone-verifone.azuremicroservices.io/

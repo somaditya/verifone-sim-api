@@ -5,6 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SimCardService {
@@ -46,7 +47,7 @@ public class SimCardService {
     List<SimCard> listDueForRenewal() {
         return repository.findAll().stream()
                 .filter(sim -> sim.getExpiryDate().isBefore(LocalDate.now().plusDays(30)))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     SimCard renewSim(Long id) {

@@ -46,4 +46,9 @@ public class SimCardController {
                     return repository.save(updatedSim);
                 });
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        repository.deleteById(id);
+    }
 }

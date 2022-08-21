@@ -58,10 +58,21 @@ public class SimCardController {
         repository.deleteById(id);
     }
 
-    @GetMapping("to-renew")
+    @GetMapping("/to-renew")
     public List<SimCard> toRenew() {
         return repository.findAll().stream()
                 .filter(sim -> sim.getExpiryDate().isBefore(LocalDate.now().plusDays(30)))
                 .toList();
+    }
+
+    @PutMapping("/renew/{id}")
+    public SimCard renew(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(simCard -> {
+                    simCard.setStatus("ACTIVE");
+                    simCard.setExpiryDate(LocalDate.now().plusDays(180));
+
+                    return repository.save(simCard);
+                }).get();
     }
 }

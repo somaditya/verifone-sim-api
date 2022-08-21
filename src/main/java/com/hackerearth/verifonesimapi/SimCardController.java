@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SimCardController {
@@ -19,8 +21,8 @@ public class SimCardController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<SimCard> root() {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity root() {
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -67,12 +69,17 @@ public class SimCardController {
 
     @PutMapping("/renew/{id}")
     public SimCard renew(@PathVariable Long id) {
-        return repository.findById(id)
-                .map(simCard -> {
-                    simCard.setStatus("ACTIVE");
-                    simCard.setExpiryDate(LocalDate.now().plusDays(180));
+        SimCard sim = repository.findById(id).get();
+        RestTemplate restTemplate = new RestTemplate();
+        boolean verified = Boolean.TRUE.equals(restTemplate.getForObject("http://localhost:8080/verify/" + id, Boolean.class));
 
-                    return repository.save(simCard);
-                }).get();
+        if (verified) {
+            sim.setStatus("ACTIVE");
+            sim.setExpiryDate(LocalDate.now().plusDays(180));
+
+            return repository.save(sim);
+        }
+
+        return sim;
     }
 }

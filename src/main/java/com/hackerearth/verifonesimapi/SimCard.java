@@ -33,11 +33,25 @@ public class SimCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SimCard simCard = (SimCard) o;
-        return simCardNo == simCard.simCardNo && mobileNo.equals(simCard.mobileNo) && status.equals(simCard.status) && expiryDate.equals(simCard.expiryDate) && stateOfRegistration.equals(simCard.stateOfRegistration) && kyc.equals(simCard.kyc) && telecomProvider.equals(simCard.telecomProvider) && fullName.equals(simCard.fullName);
+        return simCardNo == simCard.simCardNo
+                && mobileNo.equals(simCard.mobileNo)
+                && status.equals(simCard.status)
+                && expiryDate.equals(simCard.expiryDate)
+                && stateOfRegistration.equals(simCard.stateOfRegistration)
+                && kyc.equals(simCard.kyc)
+                && telecomProvider.equals(simCard.telecomProvider)
+                && fullName.equals(simCard.fullName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(simCardNo, mobileNo, status, expiryDate, stateOfRegistration, kyc, telecomProvider, fullName);
+        return Objects.hash(simCardNo,
+                mobileNo,
+                status,
+                expiryDate,
+                stateOfRegistration,
+                kyc,
+                telecomProvider,
+                fullName);
     }
 }

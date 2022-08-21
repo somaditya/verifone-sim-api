@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -55,5 +56,12 @@ public class SimCardController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @GetMapping("to-renew")
+    public List<SimCard> toRenew() {
+        return repository.findAll().stream()
+                .filter(sim -> sim.getExpiryDate().isBefore(LocalDate.now().plusDays(30)))
+                .toList();
     }
 }

@@ -17,14 +17,14 @@ public class SimCardController {
         this.repository = repository;
     }
 
-    @PostMapping("/add")
-    public SimCard add(@RequestBody SimCard newSim) {
-        return repository.save(newSim);
-    }
-
     @GetMapping("/")
     public ResponseEntity<SimCard> root() {
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public SimCard add(@RequestBody SimCard newSim) {
+        return repository.save(newSim);
     }
 
     @GetMapping("/listall")
